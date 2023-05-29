@@ -22,8 +22,10 @@ export default function FilterCity() {
             .then(res => setOrigins(res.data))
             .catch(err => console.log(err.response.data))
     }, [])
-
-    if (!destinys || !origins) {
+    if(!page){
+        return(<></>)
+    }
+    if ((!destinys || !origins)&&page.endsWith('/passagem')) {
         return (
             <Filters>
                 <ChooseCity>
@@ -36,7 +38,15 @@ export default function FilterCity() {
                 </ChooseCity>
             </Filters>
         )
-    } else if (page.endsWith('/hospedagem')) {
+    } else if((!destinys)&&page.endsWith('/hospedagem')){
+        return(<Filters>
+                <ChooseCity>
+                    <label>Selecione a cidade de destino:</label>
+                    <select>
+                    </select>
+                </ChooseCity>
+            </Filters>)
+    }else if (page.endsWith('/hospedagem')) {
         return (
             <Filters>
                 <ChooseCity>
