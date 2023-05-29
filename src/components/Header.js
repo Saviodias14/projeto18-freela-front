@@ -1,21 +1,24 @@
-import { FaHotel, FaPlaneDeparture } from "react-icons/fa"
+import { FaBars, FaHotel, FaPlaneDeparture } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
-export default function Header() {
+export default function Header({ setHide, hide }) {
     const navigate = useNavigate()
     function changePage(page) {
         navigate(`/${page}`)
     }
     return (
         <Container>
-            <h1>VIAGENS & FABULOSAS</h1>
+            <div>
+                <FaBars onClick={() => setHide(!hide)} size={35} style={{position:'fixed', left:'20px', top:'18px' }} />
+                <h1>VIAGENS & FABULOSAS</h1>
+            </div>
             <Menu>
-                <Icon onClick={()=>changePage("passagem")}>
+                <Icon onClick={() => changePage("passagem")}>
                     <FaPlaneDeparture size={30} color="#ff6961" />
                     <p>Viagens</p>
                 </Icon>
-                <Icon onClick={()=>changePage("hospedagem")}>
+                <Icon onClick={() => changePage("hospedagem")}>
                     <FaHotel size={30} color="#ff6961" />
                     <p>Hotéis</p>
                 </Icon>
@@ -40,6 +43,9 @@ h1{
     line-height: 30px;
     color: #484d50;
     margin: 20px auto 0 auto;
+}
+div{
+    display:flex;
 }
 `
 const Menu = styled.div`
